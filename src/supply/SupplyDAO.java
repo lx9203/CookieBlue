@@ -176,11 +176,8 @@ public class SupplyDAO {
 
 	// 월별 리스트 -> SupplyProc.supplyAfterListSearch & SupplyProc.intoMain
 	public List<SupplyDTO> searchByMonth(String month, String supplierCode) {
-		LOG.trace("sDao.searchByMonth 진입");
 		String nextMonth = cf.nextMonth(month) + "-01";
-		LOG.trace("sDao.searchByMonth nextMonth : " + nextMonth);
 		month = month + "-01";
-		LOG.trace("sDao.searchByMonth month : " + month);
 		String sql = "select s.sCode, p.pCode, p.pName, p.pPrice, s.sDate, s.sQuantity, s.sState from supply as s "
 				+ "inner join product as p on p.pCode=s.sProductCode where sState = 2 and p.pCode like '" + supplierCode + "%' "
 				+ "and s.sDate >= '" + month + "' and s.sDate < '" + nextMonth + "';";
